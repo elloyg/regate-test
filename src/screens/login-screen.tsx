@@ -1,23 +1,12 @@
 import { StatusBar } from "expo-status-bar";
 import { Button, Text, TextInput } from "react-native-paper";
 import styled from "styled-components/native";
-import { Theme } from "../theme";
 import { ScreenContainer } from "../components/layout";
 import { useRef, useState } from "react";
 import { LoginAPI } from "../apis/login-api";
 import { TextInput as TI } from "react-native";
 import { useUser } from "../providers/user-provider";
-
-const Header = styled.SafeAreaView`
-  height: 200px;
-  justify-content: center;
-  align-items: center;
-  background-color: ${Theme.colors.secondary};
-`;
-
-const HeaderTitle = styled(Text)`
-  color: white;
-`;
+import { Header } from "../components/header";
 
 const CenteredScrollView = styled.ScrollView.attrs({
   contentContainerStyle: {
@@ -66,9 +55,7 @@ export function LoginScreen() {
   return (
     <ScreenContainer>
       <StatusBar style="light" />
-      <Header>
-        <HeaderTitle variant="displaySmall">{"Regate Test"}</HeaderTitle>
-      </Header>
+      <Header title={"Regate Test"} />
       <CenteredScrollView>
         <Field
           label="Email"
