@@ -35,7 +35,12 @@ export function HomeScreen({ navigation }: StackScreenProps<"Home">) {
       />
       <SafeAreaView>
         <ButtonContainer>
-          <Button loading={loading} onPress={fetch} mode="contained">
+          <Button
+            loading={loading}
+            disabled={loading}
+            onPress={fetch}
+            mode="contained"
+          >
             {"Get new cats !"}
           </Button>
           {error && <ErrorText>{error}</ErrorText>}

@@ -50,13 +50,13 @@ export function LoginScreen() {
       .finally(() => setLoading(false));
   }
 
-  const loginButtonDisabled = email === "" || password === "";
+  const loginButtonDisabled = email === "" || password === "" || loading;
 
   return (
     <ScreenContainer>
       <StatusBar style="light" />
       <Header title={"Regate Test"} />
-      <CenteredScrollView>
+      <CenteredScrollView keyboardShouldPersistTaps="handled">
         <Field
           label="Email"
           value={email}
