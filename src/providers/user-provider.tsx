@@ -4,9 +4,9 @@ import {
   createContext,
   useContext,
   useMemo,
-  useState,
 } from "react";
 import { User } from "../apis/login-api";
+import { useStorageState } from "../utils/useStorageState";
 
 type UserContext = {
   user?: User;
@@ -17,7 +17,7 @@ type UserContext = {
 const userContext = createContext<UserContext | undefined>(undefined);
 
 export const UserProvider: FC<PropsWithChildren> = ({ children }) => {
-  const [user, _setUser] = useState<User | undefined>();
+  const [user, _setUser] = useStorageState<User | undefined>("user", undefined);
 
   function setUser(user: User) {
     _setUser(user);
