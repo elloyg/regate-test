@@ -6,6 +6,7 @@ import { ScreenContainer } from "../components/layout";
 import { useRef, useState } from "react";
 import { LoginAPI } from "../apis/login-api";
 import { TextInput as TI } from "react-native";
+import { useUser } from "../providers/user-provider";
 
 const Header = styled.SafeAreaView`
   height: 200px;
@@ -34,13 +35,17 @@ const Field = styled(TextInput)`
 `;
 
 export default function LoginScreen() {
+  const { setUser } = useUser();
   const passwordRef = useRef<TI | null>(null);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
   function login() {
     LoginAPI.login(email, password)
-      .then((user) => console.log(user))
+      .then((user) => {
+        console.log(user);
+        setUser(user);
+      })
       .catch((e) => console.log(e));
   }
 
