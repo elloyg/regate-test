@@ -30,3 +30,10 @@
   ```sh
   curl -L -X POST 'https://hvceigxsvecfcsmoentn.supabase.co/functions/v1/login' --data '{}'
   ```
+
+## APIs detail
+
+This application use 2 dinstinc APIs:
+
+1. A login API running on Supabase to authenticate the use
+2. A open API serving cat images and his associated breeds: <https://developers.thecatapi.com/>
