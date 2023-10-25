@@ -29,8 +29,12 @@ const CenteredScrollView = styled.ScrollView.attrs({
   flex: 1;
 `;
 
-const Field = styled(TextInput)`
+const Field = styled(TextInput).attrs({ mode: "outlined" })`
   align-self: stretch;
+  margin-bottom: 12px;
+`;
+
+const ErrorText = styled(Text).attrs({ variant: "labelMedium" })`
   margin-bottom: 12px;
 `;
 
@@ -39,14 +43,22 @@ export default function LoginScreen() {
   const passwordRef = useRef<TI | null>(null);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [error, setError] = useState(false);
+  const [loading, setLoading] = useState(false);
 
   function login() {
+    setError(false);
+    setLoading(true);
     LoginAPI.login(email, password)
       .then((user) => {
         console.log(user);
         setUser(user);
       })
-      .catch((e) => console.log(e));
+      .catch((e) => {
+        console.log(e);
+        setError(true);
+      })
+      .finally(() => setLoading(false));
   }
 
   const loginButtonDisabled = email === "" || password === "";
@@ -74,7 +86,15 @@ export default function LoginScreen() {
           returnKeyType="done"
           secureTextEntry
         />
-        <Button mode="contained" disabled={loginButtonDisabled} onPress={login}>
+        {error && (
+          <ErrorText>{"Login error: check email or password"}</ErrorText>
+        )}
+        <Button
+          mode="contained"
+          disabled={loginButtonDisabled}
+          onPress={login}
+          loading={loading}
+        >
           {"Login"}
         </Button>
       </CenteredScrollView>
