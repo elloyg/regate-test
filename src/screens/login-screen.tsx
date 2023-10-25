@@ -38,7 +38,7 @@ const ErrorText = styled(Text).attrs({ variant: "labelMedium" })`
   margin-bottom: 12px;
 `;
 
-export default function LoginScreen() {
+export function LoginScreen() {
   const { setUser } = useUser();
   const passwordRef = useRef<TI | null>(null);
   const [email, setEmail] = useState("");
